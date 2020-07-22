@@ -90,7 +90,6 @@ kitchen:
 
 docs:
 	@$(call terraform-docs,markdown interface.tf > interface.md)
-	@$(call terraform-docs,markdown k9policy/interface.tf > k9policy/interface.md)
 
 all: deps init format converge verify docs
 
