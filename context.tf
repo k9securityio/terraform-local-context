@@ -1,10 +1,17 @@
 locals {
   standard_tags = {
     Owner       = "${var.owner}"
-    Name        = "${var.name}"
     Environment = "${var.env}"
     Application = "${var.app}"
     ManagedBy   = "Terraform"
+  }
+
+  opt_name = {
+    exists = {
+      Name = "${var.name}"
+    }
+
+    does_not_exist = {}
   }
 
   opt_role = {
@@ -72,6 +79,7 @@ locals {
   }
 
   tags = "${merge(local.standard_tags
+  , local.opt_name[var.name != "" ? "exists" : "does_not_exist"]
   , local.opt_role[var.role != "" ? "exists" : "does_not_exist"]
   , local.opt_cost_center[var.cost_center != "" ? "exists" : "does_not_exist"]
   , local.opt_business_unit[var.business_unit != "" ? "exists" : "does_not_exist"]
