@@ -4,11 +4,6 @@ variable "name" {
   default     = ""
 }
 
-variable "org" {
-  type        = "string"
-  description = "Short id of the organization that owns the resource"
-}
-
 variable "owner" {
   type        = "string"
   description = "Name of the team or department responsible for the resource"

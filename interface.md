@@ -14,7 +14,6 @@
 | env | Name of the environment the resource supports | string | - | yes |
 | integrity | Expected Integrity level of data in the resource, e.g. 0.999, 0.9999, 0.99999, 0.999999 | string | `` | no |
 | name | Fully-qualified name of the resource | string | `` | no |
-| org | Short id of the organization that owns the resource | string | - | yes |
 | owner | Name of the team or department responsible for the resource | string | - | yes |
 | role | The role or function of this resource within the Application's logical architecture, e.g. load balancer, app server, database | string | `` | no |
 

@@ -5,7 +5,6 @@ resource "random_id" "testing_suffix" {
 module "minimal_context" {
   source = "../../../"
 
-  org   = "${var.org}"
   owner = "${var.owner}"
   env   = "${var.env}"
   app   = "${var.app}"
@@ -16,7 +15,6 @@ module "full_context" {
 
   name = "${var.name}"
 
-  org   = "${var.org}"
   owner = "${var.owner}"
   env   = "${var.env}"
   app   = "${var.app}"
