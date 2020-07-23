@@ -27,7 +27,6 @@ First, instantiate the module.  Here is a minimal definition:
 module "context" {
   source = "git@github.com:k9securityio/tf_context.git"
   
-  org   = "someorg"
   owner = "someowner"
   env   = "dev"
   app   = "someapi"
@@ -46,4 +45,14 @@ resource "aws_s3_bucket" "bucket" {
 
   tags = "${module.context.tags}"
 }
-``` 
+```
+
+The bucket will be tagged with:
+```json
+{
+    "Application": "someapi",
+    "Environment": "dev",
+    "ManagedBy": "Terraform",
+    "Owner": "someowner"
+}
+```
