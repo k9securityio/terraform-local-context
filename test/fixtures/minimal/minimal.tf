@@ -2,6 +2,15 @@ resource "random_id" "testing_suffix" {
   byte_length = 4
 }
 
+module "minimal_context" {
+  source = "../../../"
+
+  org   = "${var.org}"
+  owner = "${var.owner}"
+  env   = "${var.env}"
+  app   = "${var.app}"
+}
+
 module "full_context" {
   source = "../../../"
 
@@ -50,6 +59,10 @@ variable "env" {
 
 variable "app" {
   type = "string"
+}
+
+output "minimal_context-tags" {
+  value = "${module.minimal_context.tags}"
 }
 
 output "full_context-tags" {
