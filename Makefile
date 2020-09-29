@@ -1,14 +1,12 @@
-.PHONY: deps format converge verify destroy shell test kitchen build circleci-build
+.PHONY: clean deps init format lint converge verify destroy circleci-build kitchen docs
 
 IMAGE_NAME := qualimente/terraform-infra-dev
-IMAGE_TAG := 0.11.14
+IMAGE_TAG := 0.12.29
 
 FQ_IMAGE := $(IMAGE_NAME):$(IMAGE_TAG)
 
 TERRAFORM_OPTS :=
 terraform = @$(call execute,terraform $(1) $(TERRAFORM_OPTS))
-
-tflint = @$(call execute,tflint $(1))
 
 terraform-docs = @$(call execute,terraform-docs $(1))
 
@@ -52,7 +50,7 @@ define execute
 endef
 
 clean:
-	rm -rf .terraform .kitchen terraform.tfstate.d
+	rm -rf .terraform .kitchen terraform.tfstate.d test/fixtures/minimal/.terraform/ test/fixtures/minimal/generated/*
 
 shell:
 	@$(call execute,sh,)
@@ -71,7 +69,6 @@ format:
 
 lint:
 	@$(call terraform,get)
-	@$(call tflint,)
 
 converge:
 	@$(call kitchen,converge)
@@ -89,7 +86,7 @@ kitchen:
 	@$(call kitchen,$(COMMAND))
 
 docs:
-	@$(call terraform-docs,markdown interface.tf > interface.md)
+	@$(call terraform-docs,markdown . > interface.md)
 
 all: deps init format converge verify docs
 
